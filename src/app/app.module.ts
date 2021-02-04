@@ -13,13 +13,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ActivitiesComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,9 +33,24 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(swUpdate: SwUpdate, matSnackBar: MatSnackBar) {
+    swUpdate.available.subscribe(() => {
+      matSnackBar
+        .open('A new version of this application is available!', 'Update')
+        .onAction()
+        .subscribe(() => {
+          window.location.reload();
+        });
+    });
+  }
+}
