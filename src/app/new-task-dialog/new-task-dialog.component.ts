@@ -13,4 +13,19 @@ export class NewTaskDialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  enableSubmitButton(title, description) {
+
+    let title_value = title.value;
+    let description_value = description.value;
+
+    if (title_value !== "" && description_value !== "") {
+      document.querySelector<HTMLElement>("#disabledButton").style.display = "none";
+      document.querySelector<HTMLElement>("#enabledButton").style.display = "block";
+
+    } else {
+      document.querySelector<HTMLElement>("#enabledButton").style.display = "none";
+      document.querySelector<HTMLElement>("#disabledButton").style.display = "block";
+    }
+  }
 }
