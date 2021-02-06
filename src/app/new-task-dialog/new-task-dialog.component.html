@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Neue Aufgabe hinzufügen</h2>
+<div mat-dialog-content>
+    <mat-form-field appearance="legacy">
+      <mat-label>Titel</mat-label>
+      <input matInput ngModel #title="ngModel" name="title" type="text" required>
+      <mat-error *ngIf="title.touched && title.invalid">Geben Sie einen Titel ein!</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>Beschreibung</mat-label>
+      <textarea matInput ngModel #description="ngModel" name="description" type="text" rows="4" required></textarea>
+      <mat-error *ngIf="title.touched && title.invalid">Geben Sie eine Beschreibung ein!</mat-error>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" [mat-dialog-close]="[title.value, description.value]" cdkFocusInitial>Erstellen</button>
+  <button mat-button mat-dialog-close>Zurück</button>
+</div>

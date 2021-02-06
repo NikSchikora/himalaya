@@ -16,6 +16,11 @@ import { MatListModule } from '@angular/material/list';
 import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NewTaskDialogComponent } from './new-task-dialog/new-task-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     DashboardComponent,
     ActivitiesComponent,
     NavComponent,
+    NewTaskDialogComponent,
+  ],
+  entryComponents: [
+    NewTaskDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +44,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatListModule,
     MatSnackBarModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
