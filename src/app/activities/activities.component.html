@@ -1,7 +1,7 @@
 <div id="wrapper">
   <mat-list>
     <mat-list-item>
-      <mat-icon>favorite_border</mat-icon>
+      <mat-icon data-status="unliked" (click)="toggleLikeStatus()">favorite_border</mat-icon>
       <div>
         <p mat-line class="title">Task title</p>
         <p mat-subheader class="subtitle">Bisher so viele Stunden erfasst</p>
@@ -9,7 +9,7 @@
     </mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>
-      <mat-icon>favorite</mat-icon>
+      <mat-icon data-status="liked" (click)="toggleLikeStatus()">favorite</mat-icon>
       <div>
         <p mat-line class="title">Task title</p>
         <p mat-subheader class="subtitle">Bisher so viele Stunden erfasst</p>
@@ -17,7 +17,7 @@
     </mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>
-      <mat-icon>favorite_border</mat-icon>
+      <mat-icon data-status="unliked" (click)="toggleLikeStatus()">favorite_border</mat-icon>
       <div>
         <p mat-line class="title">Aufgabe mit einem etwas längeren Titel</p>
         <p mat-subheader class="subtitle">Bisher so viele Stunden erfasst</p>
