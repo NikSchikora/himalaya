@@ -1,0 +1,31 @@
+#wrapper {
+  padding: 20px;
+  padding-top: 0;
+}
+
+mat-list-item {
+  margin: 20px 0;
+  height: auto !important;
+}
+
+p {
+  padding: 0 20px;
+  width: 70vw;
+}
+
+.title {
+  font-weight: 500;
+  white-space: normal !important;
+}
+
+.subtitle {
+  height: fit-content;
+  white-space: normal !important;
+}
+
+button {
+  position: fixed;
+  z-index: 10;
+  right: 20px;
+  bottom: 20px;
+}
