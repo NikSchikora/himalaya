@@ -1,6 +1,8 @@
+import { EditTaskBottomSheetComponent } from './../edit-task-bottom-sheet/edit-task-bottom-sheet.component';
 import { NewTaskDialogComponent } from './../new-task-dialog/new-task-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-activities',
@@ -9,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ActivitiesComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private _bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
   }
@@ -45,5 +47,13 @@ export class ActivitiesComponent implements OnInit {
       // Darstellung aktualisieren
 
     });
+  }
+
+  openBottomSheet(): void {
+
+    // Je nachdem auf welche Task geklickt wurde,
+    // müssen die jeweiligen Infos an die Komponente übergeben werden
+
+    this._bottomSheet.open(EditTaskBottomSheetComponent);
   }
 }

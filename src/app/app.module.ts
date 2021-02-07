@@ -21,6 +21,8 @@ import { NewTaskDialogComponent } from './new-task-dialog/new-task-dialog.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { EditTaskBottomSheetComponent } from './edit-task-bottom-sheet/edit-task-bottom-sheet.component'
 
 @NgModule({
   declarations: [
@@ -29,9 +31,7 @@ import { MatInputModule } from '@angular/material/input';
     ActivitiesComponent,
     NavComponent,
     NewTaskDialogComponent,
-  ],
-  entryComponents: [
-    NewTaskDialogComponent,
+    EditTaskBottomSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +49,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatBottomSheetModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
