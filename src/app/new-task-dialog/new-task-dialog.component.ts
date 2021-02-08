@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -9,23 +9,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class NewTaskDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<NewTaskDialogComponent>) {}
+  firstFormGroup: FormGroup;
+  isOptional = false;
+
+  constructor(private _formBuilder: FormBuilder, private dialogRef: MatDialogRef<NewTaskDialogComponent>) {}
 
   ngOnInit(): void {
-  }
-
-  enableSubmitButton(title, description) {
-
-    let title_value = title.value;
-    let description_value = description.value;
-
-    if (title_value !== "" && description_value !== "") {
-      document.querySelector<HTMLElement>("#disabledButton").style.display = "none";
-      document.querySelector<HTMLElement>("#enabledButton").style.display = "block";
-
-    } else {
-      document.querySelector<HTMLElement>("#enabledButton").style.display = "none";
-      document.querySelector<HTMLElement>("#disabledButton").style.display = "block";
-    }
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+      secondCtrl: ['', Validators.required]
+    });
   }
 }

@@ -2,11 +2,14 @@ mat-form-field {
   width: 100%;
 }
 
+#textareaInput {
+  margin-top: 20px;
+}
+
 textarea {
   resize: none !important;
 }
 
-#enabledButton {
-  display: none;
+#submitButton {
   margin: 0;
 }

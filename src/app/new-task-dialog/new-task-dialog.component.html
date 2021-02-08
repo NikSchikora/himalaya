@@ -1,18 +1,19 @@
 <h2 mat-dialog-title>Neue Aufgabe hinzufügen</h2>
 <div mat-dialog-content>
+  <form [formGroup]="firstFormGroup">
     <mat-form-field appearance="legacy">
       <mat-label>Titel</mat-label>
-      <input matInput ngModel #title="ngModel" name="title" type="text" (input)="enableSubmitButton(title, description)" required>
-      <mat-error *ngIf="title.touched && title.invalid">Geben Sie einen Titel ein!</mat-error>
+      <input matInput formControlName="firstCtrl" type="text" autocomplete="off" #title required>
+      <mat-error >Geben Sie einen Titel ein!</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="legacy" id="textareaInput">
       <mat-label>Beschreibung</mat-label>
-      <textarea matInput ngModel #description="ngModel" name="description" type="text" rows="4" (input)="enableSubmitButton(title, description)" required></textarea>
-      <mat-error *ngIf="description.touched && description.invalid">Geben Sie eine Beschreibung ein!</mat-error>
+      <textarea matInput formControlName="secondCtrl" type="text" autocomplete="off" rows="4" #description required></textarea>
+      <mat-error>Geben Sie eine Beschreibung ein!</mat-error>
     </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-flat-button color="primary" id="disabledButton" disabled>Erstellen</button>
-  <button mat-flat-button color="primary" id="enabledButton" [mat-dialog-close]="[title.value, description.value]">Erstellen</button>
+  <button mat-flat-button color="primary" id="submitButton" [disabled]="!firstFormGroup.valid" [mat-dialog-close]="[title.value, description.value]">Erstellen</button>
   <button mat-button mat-dialog-close>Zurück</button>
 </div>
