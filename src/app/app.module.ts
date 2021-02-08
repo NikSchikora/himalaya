@@ -16,6 +16,15 @@ import { MatListModule } from '@angular/material/list';
 import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NewTaskDialogComponent } from './new-task-dialog/new-task-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { EditTaskBottomSheetComponent } from './edit-task-bottom-sheet/edit-task-bottom-sheet.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NewTimeTrackingBottomSheetComponent } from './new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +32,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     DashboardComponent,
     ActivitiesComponent,
     NavComponent,
+    NewTaskDialogComponent,
+    EditTaskBottomSheetComponent,
+    NewTimeTrackingBottomSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +47,13 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatListModule,
     MatSnackBarModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatBottomSheetModule,
+    MatStepperModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),

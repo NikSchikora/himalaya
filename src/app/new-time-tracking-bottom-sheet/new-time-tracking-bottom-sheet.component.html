@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>
+  <mat-icon data-status="unliked" (click)="closeBottomSheet(undefined)">keyboard_backspace</mat-icon>
+  <span>Neue Zeiterfassung hinzufügen</span>
+</h2>
+<div mat-dialog-content>
+  <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Titel</ng-template>
+      <form [formGroup]="firstFormGroup">
+        <mat-form-field id="titleInput">
+          <mat-label>Titel</mat-label>
+          <input matInput formControlName="firstCtrl" autocomplete="off" #title required>
+          <mat-error>Geben Sie einen Titel ein!</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-flat-button color="primary" [disabled]="!firstFormGroup.valid" matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Startdatum</ng-template>
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <mat-label>Startdatum</mat-label>
+          <input matInput formControlName="secondCtrl" type="date" #startDate required>
+          <mat-error>Geben Sie ein Startdatum ein!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Startzeit</mat-label>
+          <input matInput formControlName="thirdCtrl" type="time" #startTime required>
+          <mat-error>Geben Sie eine Uhrzeit ein!</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-flat-button color="primary" [disabled]="!secondFormGroup.valid" matStepperNext>Weiter</button>
+          <button mat-button matStepperPrevious>Zurück</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <ng-template matStepLabel>Enddatum</ng-template>
+      <form [formGroup]="thirdFormGroup">
+        <mat-form-field>
+          <mat-label>Enddatum</mat-label>
+          <input matInput formControlName="forthCtrl" type="date" #endDate required>
+          <mat-error>Geben Sie ein Enddatum ein!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Endzeit</mat-label>
+          <input matInput formControlName="fifthCtrl" type="time" #endTime required>
+          <mat-error>Geben Sie eine Uhrzeit ein!</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-flat-button color="primary" [disabled]="!thirdFormGroup.valid" (click)="closeBottomSheet([title.value, startDate.value, startTime.value, endDate.value, endTime.value])">Speichern</button>
+          <button mat-button matStepperPrevious>Zurück</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
