@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-edit-task-bottom-sheet',
@@ -7,13 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTaskBottomSheetComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bottomSheet: MatBottomSheetRef<EditTaskBottomSheetComponent>) { }
 
   ngOnInit(): void {
+
   }
 
   /*
-  / Diese Methoden und die Methoden "toggleLikeStatus" der activitites-Compnenten funktionieren noch getrennt voneinander
+  / Diese Methoden und die Methoden "toggleLikeStatus" der activitites-Componente funktionieren noch getrennt voneinander
   */
   toggleLikeStatus(): void {
 
@@ -32,5 +34,10 @@ export class EditTaskBottomSheetComponent implements OnInit {
 
       // Datenbankeintrag updaten
     }
+  }
+
+  openNewTimeTrackingBottomSheet():void {
+
+    this.bottomSheet.dismiss(true);
   }
 }

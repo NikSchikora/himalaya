@@ -1,0 +1,28 @@
+h2 {
+  display: flex;
+  align-items: center;
+}
+
+h2 span {
+  margin-left: 10px;
+}
+
+form {
+  margin-top: 10px;
+}
+
+form mat-form-field:first-child {
+  margin-right: 10%;
+}
+
+mat-form-field {
+  width: 45%;
+}
+
+#titleInput {
+  width: 70%;
+}
+
+button {
+  margin-top: 30px;
+}

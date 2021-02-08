@@ -1,8 +1,9 @@
-import { EditTaskBottomSheetComponent } from './../edit-task-bottom-sheet/edit-task-bottom-sheet.component';
-import { NewTaskDialogComponent } from './../new-task-dialog/new-task-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { NewTaskDialogComponent } from './../new-task-dialog/new-task-dialog.component';
+import { EditTaskBottomSheetComponent } from './../edit-task-bottom-sheet/edit-task-bottom-sheet.component';
+import { NewTimeTrackingBottomSheetComponent } from './../new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component';
 
 @Component({
   selector: 'app-activities',
@@ -11,14 +12,14 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 })
 export class ActivitiesComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private _bottomSheet: MatBottomSheet) { }
+  constructor(public dialog: MatDialog, private editTaskBottomSheet: MatBottomSheet, private newTimeTrackingBottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
   }
 
   toggleLikeStatus(): void {
 
-    let target: any = event.target;
+    let target: any = event.target || event.srcElement || event.currentTarget;
     let status: string = target.getAttribute("data-status");
 
     if (status === "unliked") {
@@ -54,6 +55,32 @@ export class ActivitiesComponent implements OnInit {
     // Je nachdem auf welche Task geklickt wurde,
     // müssen die jeweiligen Infos an die Komponente übergeben werden
 
-    this._bottomSheet.open(EditTaskBottomSheetComponent);
+    const editTaskBottomSheetRef = this.editTaskBottomSheet.open(EditTaskBottomSheetComponent);
+
+    editTaskBottomSheetRef.afterDismissed().subscribe((result) => {
+
+      if (result) {
+
+        this.openNewTimeTrackingBottomSheet();
+      }
+    })
+  }
+
+  openNewTimeTrackingBottomSheet():void {
+
+    const bottomSheetRef = this.newTimeTrackingBottomSheet.open(NewTimeTrackingBottomSheetComponent);
+
+    bottomSheetRef.afterDismissed().subscribe((result) => {
+
+      if (result !== undefined) {
+
+        console.log(result);
+      }
+
+      this.openBottomSheet();
+      // Neuen Datensatz anlegen
+      // Darstellung aktualisieren
+
+    });
   }
 }
