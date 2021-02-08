@@ -24,7 +24,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { EditTaskBottomSheetComponent } from './edit-task-bottom-sheet/edit-task-bottom-sheet.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { NewTimeTrackingBottomSheetComponent } from './new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component'
+import { NewTimeTrackingBottomSheetComponent } from './new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component';
+import { DashboardWeeklyComponent } from './dashboard-weekly/dashboard-weekly.component';
+import { MatCardModule } from '@angular/material/card';
+import { ChartsModule } from 'ng2-charts';
+import { DashboardProjectsComponent } from './dashboard-projects/dashboard-projects.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,8 @@ import { NewTimeTrackingBottomSheetComponent } from './new-time-tracking-bottom-
     NewTaskDialogComponent,
     EditTaskBottomSheetComponent,
     NewTimeTrackingBottomSheetComponent,
+    DashboardWeeklyComponent,
+    DashboardProjectsComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,9 @@ import { NewTimeTrackingBottomSheetComponent } from './new-time-tracking-bottom-
     MatFormFieldModule,
     MatInputModule,
     MatBottomSheetModule,
+    MatCardModule,
     MatStepperModule,
+    ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
