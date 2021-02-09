@@ -1,11 +1,11 @@
 <mat-card class="weekly-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>Willkommen {{ name }}</mat-card-title>
+    <mat-card-title>Welcome {{ name }}</mat-card-title>
     <mat-card-subtitle
-      >Deine wöchentliche Übersicht am
+      >Your weekly overview on
       {{
-        date.getDate() + "." + date.getMonth() + "." + date.getFullYear()
+        date.getMonth() + 1 + "." + date.getDate() + "." + date.getFullYear()
       }}</mat-card-subtitle
     >
   </mat-card-header>

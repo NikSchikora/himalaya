@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardProjectsComponent implements OnInit {
   public projectChartLabels: Label[] = ['Projekt 1', 'Projekt 2', 'Projekt 3'];
-  public projectChartData: MultiDataSet = [[350, 450, 100]];
+  public projectChartData: MultiDataSet = [[120, 50, 30]];
   public projectChartType: ChartType = 'doughnut';
 
   constructor() {}

@@ -29,6 +29,7 @@ import { DashboardWeeklyComponent } from './dashboard-weekly/dashboard-weekly.co
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { DashboardProjectsComponent } from './dashboard-projects/dashboard-projects.component';
+import { DashboardYearlyComponent } from './dashboard-yearly/dashboard-yearly.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DashboardProjectsComponent } from './dashboard-projects/dashboard-proje
     NewTimeTrackingBottomSheetComponent,
     DashboardWeeklyComponent,
     DashboardProjectsComponent,
+    DashboardYearlyComponent,
   ],
   imports: [
     BrowserModule,
