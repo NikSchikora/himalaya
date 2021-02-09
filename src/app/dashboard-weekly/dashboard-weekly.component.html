@@ -1,19 +1,36 @@
 <mat-card class="weekly-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>Willkommen NAME</mat-card-title>
-    <mat-card-subtitle>Deine wöchentliche Übersicht</mat-card-subtitle>
+    <mat-card-title>Willkommen {{ name }}</mat-card-title>
+    <mat-card-subtitle
+      >Deine wöchentliche Übersicht am
+      {{
+        date.getDate() + "." + date.getMonth() + "." + date.getFullYear()
+      }}</mat-card-subtitle
+    >
   </mat-card-header>
   <mat-card-content>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt adipisci
-      iste qui minima voluptatem blanditiis. Excepturi nesciunt, obcaecati esse
-      neque dolorem repellat nobis, ipsam dicta qui veniam dolores tenetur
-      reiciendis.
-    </p>
+    <div class="card-content-container">
+      <p>
+        To take a look at your recent activities, navigate to the
+        "Activities"-Tab in the main navigation. Try to keep track of your time
+        and activities to get the most detailed overview over your job-hours.
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas,
+        tempore perspiciatis cumque minima rerum, dolorum, nesciunt aspernatur
+        iusto itaque doloremque beatae repellat accusantium omnis! Vero cumque
+        commodi voluptate? Voluptatum, tenetur. Lorem, ipsum dolor sit amet
+        consectetur adipisicing elit. Officiis minima assumenda distinctio, est
+        saepe repellat ad nostrum voluptates autem ex quaerat eaque perspiciatis
+        libero laudantium culpa, sed dolorem aspernatur voluptatibus!
+      </p>
+    </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <div class="card-actions-container">
+      <button mat-raised-button color="primary">ACTIVITIES</button>
+      <button mat-raised-button>PROFILE</button>
+    </div>
   </mat-card-actions>
 </mat-card>
