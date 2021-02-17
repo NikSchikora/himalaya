@@ -49,41 +49,51 @@ export class ActivitiesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-
-      // Neuen Datensatz anlegen
-      // Darstellung aktualisieren
+      if (!result) {
+        return;
+      }
+      this.add(result[0], result[1]);
     });
   }
 
-  openBottomSheet(): void {
+  openBottomSheet(task: Task): void {
     // Je nachdem auf welche Task geklickt wurde,
     // müssen die jeweiligen Infos an die Komponente übergeben werden
 
     const editTaskBottomSheetRef = this.editTaskBottomSheet.open(
-      EditTaskBottomSheetComponent
+      EditTaskBottomSheetComponent,
+      {
+        data: {
+          task,
+        },
+      }
     );
 
     editTaskBottomSheetRef.afterDismissed().subscribe((result) => {
       if (result) {
-        this.openNewTimeTrackingBottomSheet();
+        this.openNewTimeTrackingBottomSheet(task);
       }
     });
   }
 
-  openNewTimeTrackingBottomSheet(): void {
+  openNewTimeTrackingBottomSheet(task: Task): void {
+    console.log(task);
     const bottomSheetRef = this.newTimeTrackingBottomSheet.open(
-      NewTimeTrackingBottomSheetComponent
+      NewTimeTrackingBottomSheetComponent,
+      {
+        data: {
+          task,
+        },
+      }
     );
 
     bottomSheetRef.afterDismissed().subscribe((result) => {
-      if (result !== undefined) {
-        console.log(result);
+      if (!result) {
+        return;
       }
 
-      this.openBottomSheet();
-      // Neuen Datensatz anlegen
-      // Darstellung aktualisieren
+      this.openBottomSheet(task);
+      this.add(result[0], result[1]);
     });
   }
 
@@ -91,8 +101,8 @@ export class ActivitiesComponent implements OnInit {
     this.tasks = await this.tasksService.getAll();
   }
 
-  async add(title: string, description = '', startDate: Date, endDate: Date) {
-    await this.tasksService.add(title, description, startDate, endDate);
+  async add(title: string, description = '') {
+    await this.tasksService.add(title, description);
     this.getAll();
   }
 }

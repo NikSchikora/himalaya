@@ -1,38 +1,25 @@
 <mat-list>
   <mat-list-item>
-    <mat-icon data-status="unliked" (click)="toggleLikeStatus()">favorite_border</mat-icon>
+    <mat-icon data-status="unliked" (click)="toggleLikeStatus()"
+      >favorite_border</mat-icon
+    >
     <div>
       <p mat-line class="title">Task title</p>
       <p mat-subheader class="subtitle">Sehr lange Beschreibung der Aufgabe</p>
     </div>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item id="addTimeTracking" (click)="openNewTimeTrackingBottomSheet()">
+  <mat-list-item
+    id="addTimeTracking"
+    (click)="openNewTimeTrackingBottomSheet()"
+  >
     <mat-icon data-status="unliked">add</mat-icon>
     <span>Zeiterfassung hinzufügen</span>
-  </mat-list-item >
-  <mat-list-item class="timeTrackItem">
-    <div>
-      <p>Zeiterfassung</p>
-      <p mat-line>24.01.2020 | 14:30 - 17:00</p>
-    </div>
-    <span>2.25h</span>
   </mat-list-item>
-  <mat-list-item class="timeTrackItem">
-    <div>
-      <p>Zeiterfassung</p>
-      <p mat-line>24.01.2020 | 14:30 - 17:00</p>
-    </div>
-    <span>2.25h</span>
-  </mat-list-item>
-  <mat-list-item class="timeTrackItem">
-    <div>
-      <p>Zeiterfassung</p>
-      <p mat-line>24.01.2020 | 14:30 - 17:00</p>
-    </div>
-    <span>2.25h</span>
-  </mat-list-item>
-  <mat-list-item class="timeTrackItem">
+  <mat-list-item
+    class="timeTrackItem"
+    *ngFor="let timeTracking of timeTrackings"
+  >
     <div>
       <p>Zeiterfassung</p>
       <p mat-line>24.01.2020 | 14:30 - 17:00</p>

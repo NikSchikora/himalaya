@@ -5,7 +5,7 @@
         <mat-icon data-status="unliked" (click)="toggleLikeStatus()"
           >favorite_border</mat-icon
         >
-        <div (click)="openBottomSheet()">
+        <div (click)="openBottomSheet(task)">
           <p mat-line class="title">{{ task.title }}</p>
           <p mat-subheader class="subtitle">Bisher so viele Stunden erfasst</p>
         </div>

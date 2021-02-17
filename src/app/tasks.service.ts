@@ -17,24 +17,17 @@ export class TasksService extends Dexie {
     });
   }
 
-  add(
-    title: string,
-    description = '',
-    startDate: Date,
-    endDate: Date
-  ): Promise<any> {
+  add(title: string, description = ''): Promise<any> {
     const id = uuidv4();
     return this.tasks.add({
       id,
       title,
       description,
       isLiked: false,
-      startDate,
-      endDate,
     });
   }
 
   getAll(): Promise<Task[]> {
-    return this.tasks.toArray();
+    return this.tasks.toCollection().reverse().sortBy('title');
   }
 }

@@ -1,13 +1,22 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Optional } from '@angular/core';
+import { Component, OnInit, Output, Input, Inject } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TimeTracking } from '../time-tracking';
+import { TimeTrackingService } from '../time-tracking.service';
 
 @Component({
   selector: 'app-edit-task-bottom-sheet',
   templateUrl: './edit-task-bottom-sheet.component.html',
   styleUrls: ['./edit-task-bottom-sheet.component.css'],
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
 })
 export class EditTaskBottomSheetComponent implements OnInit {
+  timeTrackings: TimeTracking[] = [];
+
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private timeTrackingService: TimeTrackingService,
     private bottomSheet: MatBottomSheetRef<EditTaskBottomSheetComponent>
   ) {}
 
@@ -19,6 +28,8 @@ export class EditTaskBottomSheetComponent implements OnInit {
   toggleLikeStatus(): void {
     let target: any = event.target;
     let status: string = target.getAttribute('data-status');
+
+    // TODO implement liking
 
     if (status === 'unliked') {
       target.setAttribute('data-status', 'liked');
@@ -35,5 +46,9 @@ export class EditTaskBottomSheetComponent implements OnInit {
 
   openNewTimeTrackingBottomSheet(): void {
     this.bottomSheet.dismiss(true);
+  }
+
+  async getAll() {
+    this.timeTrackings = await this.timeTrackingService.getAll();
   }
 }
