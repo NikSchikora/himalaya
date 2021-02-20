@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { NewTaskDialogComponent } from './../new-task-dialog/new-task-dialog.component';
-import { EditTaskBottomSheetComponent } from './../edit-task-bottom-sheet/edit-task-bottom-sheet.component';
-import { NewTimeTrackingBottomSheetComponent } from './../new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component';
-import { Task } from '../task';
-import { TasksService } from '../tasks.service';
+import { NewTaskDialogComponent } from '../../components/new-task-dialog/new-task-dialog.component';
+import { EditTaskBottomSheetComponent } from '../../components/edit-task-bottom-sheet/edit-task-bottom-sheet.component';
+import { NewTimeTrackingBottomSheetComponent } from '../../components/new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component';
+import { Task } from '../../models/task';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-activities',
@@ -88,12 +88,11 @@ export class ActivitiesComponent implements OnInit {
     );
 
     bottomSheetRef.afterDismissed().subscribe((result) => {
-      if (!result) {
-        return;
+      if (result) {
+        this.add(result[0], result[1]);
       }
 
       this.openBottomSheet(task);
-      this.add(result[0], result[1]);
     });
   }
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
-import { TimeTracking } from './time-tracking';
-import { Task } from './task';
+import { TimeTracking } from '../models/time-tracking';
+import { Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root',
@@ -30,9 +30,11 @@ export class TimeTrackingService extends Dexie {
       description,
       startDate,
       endDate,
-      task: task.id,
+      taskId: task.id,
     });
   }
+
+  // TODO save()
 
   getAll(): Promise<TimeTracking[]> {
     return this.timeTrackings.toCollection().reverse().sortBy('endDate');

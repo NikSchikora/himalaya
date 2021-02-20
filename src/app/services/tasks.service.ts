@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
-import { Task } from './task';
+import { Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,8 @@ export class TasksService extends Dexie {
       isLiked: false,
     });
   }
+
+  // TODO save()
 
   getAll(): Promise<Task[]> {
     return this.tasks.toCollection().reverse().sortBy('title');

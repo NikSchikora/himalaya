@@ -3,5 +3,5 @@ export class TimeTracking {
   description: string;
   startDate: Date;
   endDate: Date;
-  task: string;
+  taskId: string;
 }

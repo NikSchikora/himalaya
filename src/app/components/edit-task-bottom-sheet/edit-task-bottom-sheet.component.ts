@@ -2,20 +2,18 @@ import { Optional } from '@angular/core';
 import { Component, OnInit, Output, Input, Inject } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TimeTracking } from '../time-tracking';
-import { TimeTrackingService } from '../time-tracking.service';
+import { TimeTracking } from '../../models/time-tracking';
+import { TimeTrackingService } from '../../services/time-tracking.service';
 
 @Component({
   selector: 'app-edit-task-bottom-sheet',
   templateUrl: './edit-task-bottom-sheet.component.html',
   styleUrls: ['./edit-task-bottom-sheet.component.css'],
-  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
 })
 export class EditTaskBottomSheetComponent implements OnInit {
   timeTrackings: TimeTracking[] = [];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private timeTrackingService: TimeTrackingService,
     private bottomSheet: MatBottomSheetRef<EditTaskBottomSheetComponent>
   ) {}
