@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { TimeTrackingService } from '../../services/time-tracking.service';
 import { Task } from '../../models/task';
-import { Optional } from '@angular/core';
 
 @Component({
   selector: 'app-new-time-tracking-bottom-sheet',
@@ -49,14 +48,17 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
     let startDateObject = new Date(startDate + ' ' + startTime);
     let endDateObject = new Date(endDate + ' ' + endTime);
 
-    this.add(title, startDateObject, endDateObject, data.task);
-    this.bottomsheet.dismiss(data);
+    this.bottomsheet.dismiss({
+      title,
+      startDate: startDateObject,
+      endDate: endDateObject,
+    });
   }
 
   async add(title: string, startDate: Date, endDate: Date, task: Task) {
     console.log(task);
 
-    if(!task) {
+    if (!task) {
       // TODO PREVENT ERROR
       return;
     }

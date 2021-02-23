@@ -6,7 +6,7 @@ import { Task } from '../models/task';
 @Injectable({
   providedIn: 'root',
 })
-export class TasksService extends Dexie {
+export class TaskService extends Dexie {
   tasks: Dexie.Table<Task, string>;
 
   constructor() {
@@ -27,7 +27,14 @@ export class TasksService extends Dexie {
     });
   }
 
-  // TODO save()
+  toggleLikeStatus(task: Task): void {
+    const updatedTask: Task = { ...task, isLiked: !task.isLiked };
+    this.save(updatedTask);
+  }
+
+  save(task: Task) {
+    this.tasks.update(task.id, task);
+  }
 
   getAll(): Promise<Task[]> {
     return this.tasks.toCollection().reverse().sortBy('title');

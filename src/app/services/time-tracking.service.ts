@@ -34,7 +34,9 @@ export class TimeTrackingService extends Dexie {
     });
   }
 
-  // TODO save()
+  save(timeTracking: TimeTracking) {
+    this.timeTrackings.update(timeTracking.id, timeTracking);
+  }
 
   getAll(): Promise<TimeTracking[]> {
     return this.timeTrackings.toCollection().reverse().sortBy('endDate');
