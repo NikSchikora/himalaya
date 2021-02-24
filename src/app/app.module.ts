@@ -30,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { DashboardProjectsComponent } from './components/dashboard-projects/dashboard-projects.component';
 import { DashboardYearlyComponent } from './components/dashboard-yearly/dashboard-yearly.component';
+import { TotalTimetrackingComponent } from './components/total-timetracking/total-timetracking.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { DashboardYearlyComponent } from './components/dashboard-yearly/dashboar
     DashboardWeeklyComponent,
     DashboardProjectsComponent,
     DashboardYearlyComponent,
+    TotalTimetrackingComponent,
   ],
   imports: [
     BrowserModule,
