@@ -1,6 +1,6 @@
 <div id="wrapper">
   <mat-list>
-    <div *ngFor="let task of dataService.getTasks()">
+    <div *ngFor="let task of this.dataService.tasks">
       <mat-list-item>
         <mat-icon (click)="toggleLikeStatus(task)">{{
           task.isLiked ? "favorite" : "favorite_border"

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { TimeTrackingService } from '../../services/time-tracking.service';
 import { Task } from '../../models/task';
+import { DataService } from 'src/app/services/data-service.service';
 
 @Component({
   selector: 'app-new-time-tracking-bottom-sheet',
@@ -17,7 +18,7 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
   isOptional = false;
 
   constructor(
-    private timeTrackingService: TimeTrackingService,
+    private dataService: DataService,
     private _formBuilder: FormBuilder,
     private bottomsheet: MatBottomSheetRef<NewTimeTrackingBottomSheetComponent>
   ) {}
@@ -36,8 +37,8 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
     });
   }
 
-  closeBottomSheet(data) {
-    console.log(data);
+  async closeBottomSheet(data) {
+    console.log('passed data to closeBottomSheet()', data);
     if (!data) {
       this.bottomsheet.dismiss();
       return;
@@ -48,21 +49,9 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
     let startDateObject = new Date(startDate + ' ' + startTime);
     let endDateObject = new Date(endDate + ' ' + endTime);
 
-    this.bottomsheet.dismiss({
-      title,
-      startDate: startDateObject,
-      endDate: endDateObject,
-    });
-  }
-
-  async add(title: string, startDate: Date, endDate: Date, task: Task) {
-    console.log(task);
-
-    if (!task) {
-      // TODO PREVENT ERROR
-      return;
-    }
-
-    await this.timeTrackingService.add(title, startDate, endDate, task);
+    this.dataService
+      .getTimeTrackingService()
+      .add(title, startDate, endDate, this.dataService.getCurrentTask());
+    this.bottomsheet.dismiss();
   }
 }

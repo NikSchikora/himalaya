@@ -13,8 +13,12 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './activities.component.html',
   styleUrls: ['./activities.component.css'],
 })
-export class ActivitiesComponent {
+export class ActivitiesComponent implements OnInit {
   constructor(public dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.dataService.fetchTasks();
+  }
 
   toggleLikeStatus(task: Task) {
     this.dataService.getTasksService().toggleLikeStatus(task);

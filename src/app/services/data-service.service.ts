@@ -5,6 +5,7 @@ import { EditTaskBottomSheetComponent } from '../components/edit-task-bottom-she
 import { NewTaskDialogComponent } from '../components/new-task-dialog/new-task-dialog.component';
 import { NewTimeTrackingBottomSheetComponent } from '../components/new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component';
 import { Task } from '../models/task';
+import { TimeTracking } from '../models/time-tracking';
 import { TaskService } from './task.service';
 import { TimeTrackingService } from './time-tracking.service';
 
@@ -12,8 +13,9 @@ import { TimeTrackingService } from './time-tracking.service';
   providedIn: 'root',
 })
 export class DataService {
-  private tasks: Task[] = [];
-  private currentTask = null;
+  public tasks: Task[] = [];
+  public timeTrackings: TimeTracking[] = [];
+  public currentTask = null;
 
   constructor(
     private taskService: TaskService,
@@ -22,6 +24,8 @@ export class DataService {
     public bottomSheet: MatBottomSheet
   ) {
     this.fetchTasks();
+    this.fetchCurrentTask();
+    this.fetchTimeTrackings();
   }
 
   openNewTaskDialog() {
@@ -45,16 +49,8 @@ export class DataService {
       NewTimeTrackingBottomSheetComponent
     );
 
-    bottomSheetRef.afterDismissed().subscribe((result) => {
-      if (result) {
-        this.timeTrackingService.add(
-          result[0],
-          result[1],
-          result[2],
-          this.currentTask
-        );
-      }
-
+    bottomSheetRef.afterDismissed().subscribe((res) => {
+      this.fetchTimeTrackings();
       this.openTaskBottomSheet(this.currentTask);
     });
   }
@@ -77,14 +73,12 @@ export class DataService {
     });
   }
 
-  async fetchTasks() {
-    console.log('fetch tasks');
-    this.tasks = await this.taskService.getAll();
+  getTasks() {
+    return this.tasks;
   }
 
-  getTasks() {
-    console.log('tasks are displayed', this.tasks);
-    return this.tasks;
+  getTimeTrackings() {
+    return this.timeTrackings;
   }
 
   getTasksService() {
@@ -93,5 +87,29 @@ export class DataService {
 
   getTimeTrackingService() {
     return this.timeTrackingService;
+  }
+
+  getCurrentTask() {
+    return this.currentTask;
+  }
+
+  async fetchTasks() {
+    console.log('fetch tasks');
+    this.tasks = [...(await this.taskService.getAll())];
+  }
+
+  fetchCurrentTask() {
+    if (!this.currentTask) {
+      return;
+    }
+
+    this.currentTask = this.tasks.find(
+      (task) => task.id === this.currentTask.id
+    );
+  }
+
+  async fetchTimeTrackings() {
+    console.log('fetch timeTrackings');
+    this.timeTrackings = [...(await this.timeTrackingService.getAll())];
   }
 }

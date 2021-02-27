@@ -1,11 +1,15 @@
 <mat-list>
   <mat-list-item>
-    <mat-icon data-status="unliked" (click)="toggleLikeStatus()"
-      >favorite_border</mat-icon
-    >
+    <mat-icon data-status="unliked" (click)="toggleLikeStatus()">
+      {{
+        this.dataService.currentTask.isLiked ? "favorite" : "favorite_border"
+      }}
+    </mat-icon>
     <div>
-      <p mat-line class="title">Task title</p>
-      <p mat-subheader class="subtitle">Sehr lange Beschreibung der Aufgabe</p>
+      <p mat-line class="title">{{ this.dataService.currentTask.title }}</p>
+      <p mat-subheader class="subtitle">
+        {{ this.dataService.currentTask.description }}
+      </p>
     </div>
   </mat-list-item>
   <mat-divider></mat-divider>
@@ -18,11 +22,14 @@
   </mat-list-item>
   <mat-list-item
     class="timeTrackItem"
-    *ngFor="let timeTracking of timeTrackings"
+    *ngFor="let timeTracking of getRelatedTimeTrackings()"
   >
     <div>
       <p>Zeiterfassung</p>
-      <p mat-line>24.01.2020 | 14:30 - 17:00</p>
+      <p mat-line>
+        <!-- {{ timeTracking.startDate.toLocaleDateString("de-DE") }} -
+        {{ timeTracking.endDate.toLocaleDateString("de-DE") }} -->
+      </p>
     </div>
     <span>2.25h</span>
   </mat-list-item>
