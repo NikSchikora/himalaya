@@ -21,11 +21,10 @@ export class EditTaskBottomSheetComponent implements OnInit {
   ngOnInit(): void {}
 
   async toggleLikeStatus() {
-    await this.dataService.fetchTasks();
-    this.dataService.fetchCurrentTask();
-    const currentTask = this.dataService.currentTask;
-
-    this.dataService.getTaskService().toggleLikeStatus(currentTask);
+    this.dataService
+      .getTaskService()
+      .toggleLikeStatus(this.dataService.currentTask);
+    this.dataService.fetchTasks();
   }
 
   openNewTimeTrackingBottomSheet(): void {
@@ -33,10 +32,9 @@ export class EditTaskBottomSheetComponent implements OnInit {
   }
 
   getRelatedTimeTrackings() {
-    const currentTask = this.dataService.currentTask;
-
     return this.dataService.timeTrackings.filter(
-      (timeTracking: TimeTracking) => timeTracking.taskId === currentTask.id
+      (timeTracking: TimeTracking) =>
+        timeTracking.taskId === this.dataService.currentTask.id
     );
   }
 }

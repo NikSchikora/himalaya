@@ -20,7 +20,7 @@ export class DataService {
   private readonly _timeTrackings = new BehaviorSubject<TimeTracking[]>([]);
   readonly timeTrackings$ = this._timeTrackings.asObservable();
 
-  private readonly _currentTask = new BehaviorSubject<Task>(null);
+  private readonly _currentTask = new BehaviorSubject<string>(null);
   readonly currentTask$ = null;
 
   constructor(
@@ -30,7 +30,6 @@ export class DataService {
     public bottomSheet: MatBottomSheet
   ) {
     this.fetchTasks();
-    this.fetchCurrentTask();
     this.fetchTimeTrackings();
   }
 
@@ -51,11 +50,17 @@ export class DataService {
   }
 
   get currentTask(): Task {
-    return this._currentTask.getValue();
+    const currentTaskId = this._currentTask.value;
+
+    if (!currentTaskId) {
+      return null;
+    }
+
+    return this.tasks.find((task) => task.id === currentTaskId);
   }
 
   set currentTask(val: Task) {
-    this._currentTask.next(val);
+    this._currentTask.next(val.id);
   }
 
   openNewTaskDialog() {
@@ -89,7 +94,6 @@ export class DataService {
     // Je nachdem auf welche Task geklickt wurde,
     // müssen die jeweiligen Infos an die Komponente übergeben werden
 
-    console.log(task);
     this.currentTask = task;
 
     const editTaskBottomSheetRef = this.bottomSheet.open(
@@ -106,16 +110,6 @@ export class DataService {
   async fetchTasks() {
     console.log('fetch tasks');
     this.tasks = [...(await this.taskService.getAll())];
-  }
-
-  fetchCurrentTask() {
-    if (!this.currentTask) {
-      return;
-    }
-
-    this.currentTask = this.tasks.find(
-      (task) => task.id === this.currentTask.id
-    );
   }
 
   async fetchTimeTrackings() {
