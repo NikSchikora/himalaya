@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
 import { EditTaskBottomSheetComponent } from '../components/edit-task-bottom-sheet/edit-task-bottom-sheet.component';
 import { NewTaskDialogComponent } from '../components/new-task-dialog/new-task-dialog.component';
 import { NewTimeTrackingBottomSheetComponent } from '../components/new-time-tracking-bottom-sheet/new-time-tracking-bottom-sheet.component';
@@ -13,9 +14,14 @@ import { TimeTrackingService } from './time-tracking.service';
   providedIn: 'root',
 })
 export class DataService {
-  public tasks: Task[] = [];
-  public timeTrackings: TimeTracking[] = [];
-  public currentTask = null;
+  private readonly _tasks = new BehaviorSubject<Task[]>([]);
+  readonly tasks$ = this._tasks.asObservable();
+
+  private readonly _timeTrackings = new BehaviorSubject<TimeTracking[]>([]);
+  readonly timeTrackings$ = this._timeTrackings.asObservable();
+
+  private readonly _currentTask = new BehaviorSubject<Task>(null);
+  readonly currentTask$ = null;
 
   constructor(
     private taskService: TaskService,
@@ -26,6 +32,30 @@ export class DataService {
     this.fetchTasks();
     this.fetchCurrentTask();
     this.fetchTimeTrackings();
+  }
+
+  get tasks(): Task[] {
+    return this._tasks.getValue();
+  }
+
+  set tasks(val: Task[]) {
+    this._tasks.next(val);
+  }
+
+  get timeTrackings(): TimeTracking[] {
+    return this._timeTrackings.getValue();
+  }
+
+  set timeTrackings(val: TimeTracking[]) {
+    this._timeTrackings.next(val);
+  }
+
+  get currentTask(): Task {
+    return this._currentTask.getValue();
+  }
+
+  set currentTask(val: Task) {
+    this._currentTask.next(val);
   }
 
   openNewTaskDialog() {
@@ -73,26 +103,6 @@ export class DataService {
     });
   }
 
-  getTasks() {
-    return this.tasks;
-  }
-
-  getTimeTrackings() {
-    return this.timeTrackings;
-  }
-
-  getTasksService() {
-    return this.taskService;
-  }
-
-  getTimeTrackingService() {
-    return this.timeTrackingService;
-  }
-
-  getCurrentTask() {
-    return this.currentTask;
-  }
-
   async fetchTasks() {
     console.log('fetch tasks');
     this.tasks = [...(await this.taskService.getAll())];
@@ -111,5 +121,13 @@ export class DataService {
   async fetchTimeTrackings() {
     console.log('fetch timeTrackings');
     this.timeTrackings = [...(await this.timeTrackingService.getAll())];
+  }
+
+  public getTaskService() {
+    return this.taskService;
+  }
+
+  public getTimeTrackingService() {
+    return this.timeTrackingService;
   }
 }

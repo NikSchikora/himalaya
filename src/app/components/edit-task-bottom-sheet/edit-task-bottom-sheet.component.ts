@@ -25,7 +25,7 @@ export class EditTaskBottomSheetComponent implements OnInit {
     this.dataService.fetchCurrentTask();
     const currentTask = this.dataService.currentTask;
 
-    this.dataService.getTasksService().toggleLikeStatus(currentTask);
+    this.dataService.getTaskService().toggleLikeStatus(currentTask);
   }
 
   openNewTimeTrackingBottomSheet(): void {
@@ -33,12 +33,10 @@ export class EditTaskBottomSheetComponent implements OnInit {
   }
 
   getRelatedTimeTrackings() {
-    const currentTask = this.dataService.getCurrentTask();
+    const currentTask = this.dataService.currentTask;
 
-    return this.dataService
-      .getTimeTrackings()
-      .filter(
-        (timeTracking: TimeTracking) => timeTracking.taskId === currentTask.id
-      );
+    return this.dataService.timeTrackings.filter(
+      (timeTracking: TimeTracking) => timeTracking.taskId === currentTask.id
+    );
   }
 }

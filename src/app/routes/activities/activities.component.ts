@@ -21,7 +21,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   toggleLikeStatus(task: Task) {
-    this.dataService.getTasksService().toggleLikeStatus(task);
+    this.dataService.getTaskService().toggleLikeStatus(task);
     this.dataService.fetchTasks();
   }
 }
