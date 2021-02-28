@@ -39,6 +39,16 @@ export class TimeTrackingService extends Dexie {
   }
 
   getAll(): Promise<TimeTracking[]> {
-    return this.timeTrackings.toCollection().reverse().sortBy('endDate');
+    return this.timeTrackings
+      .toCollection()
+      .reverse()
+      .sortBy('endDate')
+      .then((items) =>
+        items.map((item) => ({
+          ...item,
+          startDate: new Date(item.startDate),
+          endDate: new Date(item.endDate),
+        }))
+      );
   }
 }
