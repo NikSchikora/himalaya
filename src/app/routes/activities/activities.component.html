@@ -1,0 +1,25 @@
+<div id="wrapper">
+  <mat-list>
+    <div *ngFor="let task of this.dataService.tasks">
+      <mat-list-item>
+        <mat-icon (click)="toggleLikeStatus(task)">{{
+          task.isLiked ? "favorite" : "favorite_border"
+        }}</mat-icon>
+        <div (click)="dataService.openTaskBottomSheet(task)">
+          <p mat-line class="title">{{ task.title }}</p>
+          <p mat-subheader class="subtitle">Bisher so viele Stunden erfasst</p>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+  <button
+    mat-fab
+    color="primary"
+    aria-label="Add new task"
+    id="addTaskButton"
+    (click)="dataService.openNewTaskDialog()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
