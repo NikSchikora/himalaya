@@ -18,39 +18,20 @@
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
-      <ng-template matStepLabel>Startdatum</ng-template>
+      <ng-template matStepLabel>Datum & Dauer</ng-template>
       <form [formGroup]="secondFormGroup">
         <mat-form-field>
-          <mat-label>Startdatum</mat-label>
-          <input matInput formControlName="secondCtrl" type="date" #startDate required>
-          <mat-error>Geben Sie ein Startdatum ein!</mat-error>
+          <mat-label>Datum</mat-label>
+          <input matInput formControlName="secondCtrl" type="date" #date required>
+          <mat-error>Geben Sie ein Datum ein!</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Startzeit</mat-label>
-          <input matInput formControlName="thirdCtrl" type="time" #startTime required>
-          <mat-error>Geben Sie eine Uhrzeit ein!</mat-error>
+          <mat-label>Dauer</mat-label>
+          <input matInput formControlName="thirdCtrl" type="time" #duration required>
+          <mat-error>Geben Sie eine Dauer ein!</mat-error>
         </mat-form-field>
         <div>
-          <button mat-flat-button color="primary" [disabled]="!secondFormGroup.valid" matStepperNext>Weiter</button>
-          <button mat-button matStepperPrevious>Zurück</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
-      <ng-template matStepLabel>Enddatum</ng-template>
-      <form [formGroup]="thirdFormGroup">
-        <mat-form-field>
-          <mat-label>Enddatum</mat-label>
-          <input matInput formControlName="forthCtrl" type="date" #endDate required>
-          <mat-error>Geben Sie ein Enddatum ein!</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Endzeit</mat-label>
-          <input matInput formControlName="fifthCtrl" type="time" #endTime required>
-          <mat-error>Geben Sie eine Uhrzeit ein!</mat-error>
-        </mat-form-field>
-        <div>
-          <button mat-flat-button color="primary" [disabled]="!thirdFormGroup.valid" (click)="closeBottomSheet([title.value, startDate.value, startTime.value, endDate.value, endTime.value])">Speichern</button>
+          <button mat-flat-button color="primary" [disabled]="!secondFormGroup.valid" (click)="closeBottomSheet([title.value, date.value, duration.value])">Speichern</button>
           <button mat-button matStepperPrevious>Zurück</button>
         </div>
       </form>

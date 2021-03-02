@@ -5,6 +5,7 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { TimeTrackingService } from '../../services/time-tracking.service';
 import { Task } from '../../models/task';
 import { DataService } from 'src/app/services/data-service.service';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-new-time-tracking-bottom-sheet',
@@ -29,29 +30,35 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required],
-      thirdCtrl: ['', Validators.required],
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      forthCtrl: ['', Validators.required],
-      fifthCtrl: ['', Validators.required],
+      thirdCtrl: [
+        '',
+        Validators.required,
+        async (control: AbstractControl) => {
+          if (control.value !== '00:00') return null;
+          return { notANumber: 'Die Dauer hat keine Länge.' };
+        },
+      ],
     });
   }
 
   async closeBottomSheet(data) {
-    console.log('passed data to closeBottomSheet()', data);
     if (!data) {
       this.bottomsheet.dismiss();
       return;
     }
 
-    let [title, startDate, startTime, endDate, endTime] = data;
+    let [title, date, duration] = data;
 
-    let startDateObject = new Date(startDate + ' ' + startTime);
-    let endDateObject = new Date(endDate + ' ' + endTime);
+    let durationParts = duration.split(':');
 
     this.dataService
       .getTimeTrackingService()
-      .add(title, startDateObject, endDateObject, this.dataService.currentTask);
+      .add(
+        title,
+        new Date(date),
+        { hours: durationParts[0], minutes: durationParts[1] },
+        this.dataService.currentTask
+      );
     this.bottomsheet.dismiss();
   }
 }
