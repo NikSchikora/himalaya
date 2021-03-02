@@ -51,7 +51,7 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
 
     this.dataService
       .getTimeTrackingService()
-      .add(title, startDate, endDate, this.dataService.currentTask);
+      .add(title, startDateObject, endDateObject, this.dataService.currentTask);
     this.bottomsheet.dismiss();
   }
 }
