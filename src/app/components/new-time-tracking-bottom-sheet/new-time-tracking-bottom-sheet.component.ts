@@ -31,10 +31,6 @@ export class NewTimeTrackingBottomSheetComponent implements OnInit {
       secondCtrl: ['', Validators.required],
       thirdCtrl: ['', Validators.required],
     });
-    this.thirdFormGroup = this._formBuilder.group({
-      forthCtrl: ['', Validators.required],
-      fifthCtrl: ['', Validators.required],
-    });
   }
 
   async closeBottomSheet(data) {
