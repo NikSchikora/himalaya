@@ -38,6 +38,10 @@ export class TimeTrackingService extends Dexie {
     this.timeTrackings.update(timeTracking.id, timeTracking);
   }
 
+  remove(timeTracking: TimeTracking) {
+    this.timeTrackings.delete(timeTracking.id);
+  }
+
   getAll(): Promise<TimeTracking[]> {
     return this.timeTrackings
       .toCollection()

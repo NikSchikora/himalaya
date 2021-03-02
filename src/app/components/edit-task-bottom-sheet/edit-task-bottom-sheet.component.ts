@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Optional } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
@@ -36,5 +37,10 @@ export class EditTaskBottomSheetComponent implements OnInit {
       (timeTracking: TimeTracking) =>
         timeTracking.taskId === this.dataService.currentTask.id
     );
+  }
+
+  deleteTimeTracking(timeTracking: TimeTracking) {
+    this.dataService.getTimeTrackingService().remove(timeTracking);
+    this.dataService.fetchTimeTrackings();
   }
 }
