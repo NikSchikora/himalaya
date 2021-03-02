@@ -18,9 +18,10 @@ export class TotalTimetrackingComponent implements OnInit {
 
   async calculateTotalTime() {
     let times: TimeTracking[] = await this.timeTrackingService.getAll();
-    times.forEach((tracking: TimeTracking) => {
-      this.totalTime +=
-        tracking.endDate.getTime() - tracking.startDate.getTime();
-    });
+
+    // times.forEach((tracking: TimeTracking) => {
+    //   this.totalTime +=
+    //     tracking.endDate.getTime() - tracking.startDate.getTime();
+    // });
   }
 }

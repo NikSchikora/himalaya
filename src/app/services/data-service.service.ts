@@ -69,7 +69,6 @@ export class DataService {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (!result) {
         return;
       }
@@ -115,6 +114,7 @@ export class DataService {
   async fetchTimeTrackings() {
     console.log('fetch timeTrackings');
     this.timeTrackings = [...(await this.timeTrackingService.getAll())];
+    console.log(this.timeTrackings);
   }
 
   public getTaskService() {
