@@ -21,18 +21,18 @@ export class DashboardYearlyComponent implements OnInit {
     },
   };
   public barChartLabels: Label[] = [
-    'January',
-    'February',
-    'March',
+    'Januar',
+    'Februar',
+    'März',
     'April',
-    'May',
-    'June',
-    'July',
+    'Mai',
+    'Juni',
+    'Juli',
     'August',
     'September',
-    'October',
+    'Oktober',
     'November',
-    'December',
+    'Dezember',
   ];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
@@ -41,7 +41,7 @@ export class DashboardYearlyComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     {
       data: [60, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      label: 'Job-hours tracked',
+      label: 'Erfasste Arbeitsstunden',
     },
   ];
 
