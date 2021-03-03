@@ -43,7 +43,7 @@ export class DashboardYearlyComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     {
       data: [],
-      label: 'Job-hours tracked',
+      label: 'Erfasste Arbeitsstunden',
     },
   ];
 
