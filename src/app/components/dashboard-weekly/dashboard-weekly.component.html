@@ -1,9 +1,9 @@
 <mat-card class="weekly-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>Welcome {{ name }}</mat-card-title>
+    <mat-card-title>Willkommen {{ name }}</mat-card-title>
     <mat-card-subtitle
-      >Your weekly overview on
+      >Aktuelle Wochenübersicht vom
       {{
         date.getMonth() + 1 + "." + date.getDate() + "." + date.getFullYear()
       }}</mat-card-subtitle
@@ -12,9 +12,10 @@
   <mat-card-content>
     <div class="card-content-container">
       <p>
-        To take a look at your recent activities, navigate to the
-        "Activities"-Tab in the main navigation. Try to keep track of your time
-        and activities to get the most detailed overview over your job-hours.
+        Um einen Blick auf die letzten Aktivitäten zu werfen, wechsele einfach
+        zum "Aktivitäten"-Reiter in der Hauptnavigation. Das Erfassen der Zeiten
+        und Aktivitäten dort, beschert einen äußerst detaillierten Überblick
+        über die persönlichen Arbeitsstunden.
         <br />
         <br />
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas,
@@ -29,9 +30,19 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="card-actions-container">
+      <<<<<<< HEAD
+      <button mat-raised-button color="primary">AKTIVITÄTEN</button>
+      <button mat-raised-button>PROFIL</button>
+      ======= <<<<<<<<
+      HEAD:src/app/components/dashboard-weekly/dashboard-weekly.component.html
       <a mat-raised-button color="primary" routerLink="/activities"
         >ACTIVITIES</a
       >
+      ========
+      <button mat-raised-button color="primary">AKTIVITÄTEN</button>
+      <button mat-raised-button>PROFIL</button>
+      >>>>>>>> main:src/app/dashboard-weekly/dashboard-weekly.component.html
+      >>>>>>> main
     </div>
   </mat-card-actions>
 </mat-card>

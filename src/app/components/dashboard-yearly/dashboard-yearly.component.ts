@@ -23,18 +23,18 @@ export class DashboardYearlyComponent implements OnInit {
     },
   };
   public barChartLabels: Label[] = [
-    'January',
-    'February',
-    'March',
+    'Januar',
+    'Februar',
+    'März',
     'April',
-    'May',
-    'June',
-    'July',
+    'Mai',
+    'Juni',
+    'Juli',
     'August',
     'September',
-    'October',
+    'Oktober',
     'November',
-    'December',
+    'Dezember',
   ];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
