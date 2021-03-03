@@ -1,5 +1,6 @@
 .weekly-card {
   max-width: 80%;
+  min-width: 80vw;
 }
 
 .header-image {
