@@ -25,13 +25,14 @@
     *ngFor="let timeTracking of getRelatedTimeTrackings()"
   >
     <div>
-      <p>Zeiterfassung</p>
-      <p mat-line>
-        <!-- {{ timeTracking.startDate.toLocaleDateString("de-DE") }} -
-        {{ timeTracking.endDate.toLocaleDateString("de-DE") }} -->
-      </p>
+      <p>{{ timeTracking.description }}</p>
     </div>
-    <span>2.25h</span>
+    <span>{{
+      timeTracking.duration.hours +
+        ":" +
+        timeTracking.duration.minutes +
+        " Stunden"
+    }}</span>
     <mat-icon class="delete-icon" (click)="deleteTimeTracking(timeTracking)"
       >delete</mat-icon
     >
