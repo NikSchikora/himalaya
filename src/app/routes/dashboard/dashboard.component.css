@@ -1,0 +1,23 @@
+.dashboard-content {
+  padding: 2rem;
+}
+
+.container {
+  display: flex;
+}
+
+.col {
+  min-width: 40vw;
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+.row {
+  display: inline-block;
+}

@@ -1,3 +1,5 @@
+import { TimeTracking } from 'src/app/models/time-tracking';
+import { DataService } from 'src/app/services/data-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -40,14 +42,16 @@ export class DashboardYearlyComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     {
-      data: [60, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      label: 'Erfasste Arbeitsstunden',
+      data: [],
+      label: 'Job-hours tracked',
     },
   ];
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadYearlyData();
+  }
 
   // events
   public chartClicked({
@@ -58,6 +62,21 @@ export class DashboardYearlyComponent implements OnInit {
     active: {}[];
   }): void {
     console.log(event, active);
+  }
+
+  public async loadYearlyData() {
+    for (let i = 0; i < 12; i++) {
+      let monthly: number = 0;
+      this.dataService.timeTrackings.forEach((tracking: TimeTracking) => {
+        if (tracking.date.getMonth() == i) {
+          monthly = monthly + tracking.duration.hours;
+          if (tracking.duration.minutes > 30) {
+            monthly++;
+          }
+        }
+      });
+      this.barChartData[0].data.push(monthly);
+    }
   }
 
   public chartHovered({

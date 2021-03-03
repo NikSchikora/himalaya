@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>
+  <mat-icon data-status="unliked" (click)="closeBottomSheet(undefined)">keyboard_backspace</mat-icon>
+  <span>Neue Zeiterfassung hinzufügen</span>
+</h2>
+<div mat-dialog-content>
+  <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Titel</ng-template>
+      <form [formGroup]="firstFormGroup">
+        <mat-form-field id="titleInput">
+          <mat-label>Titel</mat-label>
+          <input matInput formControlName="firstCtrl" autocomplete="off" #title required>
+          <mat-error>Geben Sie einen Titel ein!</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-flat-button color="primary" [disabled]="!firstFormGroup.valid" matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Datum & Dauer</ng-template>
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <mat-label>Datum</mat-label>
+          <input matInput formControlName="secondCtrl" type="date" #date required>
+          <mat-error>Geben Sie ein Datum ein!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Dauer</mat-label>
+          <input matInput formControlName="thirdCtrl" type="time" #duration required>
+          <mat-error>Geben Sie eine Dauer ein!</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-flat-button color="primary" [disabled]="!secondFormGroup.valid" (click)="closeBottomSheet([title.value, date.value, duration.value])">Speichern</button>
+          <button mat-button matStepperPrevious>Zurück</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

@@ -1,0 +1,39 @@
+<mat-list>
+  <mat-list-item>
+    <mat-icon data-status="unliked" (click)="toggleLikeStatus()">
+      {{
+        this.dataService.currentTask.isLiked ? "favorite" : "favorite_border"
+      }}
+    </mat-icon>
+    <div>
+      <p mat-line class="title">{{ this.dataService.currentTask.title }}</p>
+      <p mat-subheader class="subtitle">
+        {{ this.dataService.currentTask.description }}
+      </p>
+    </div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item
+    id="addTimeTracking"
+    (click)="openNewTimeTrackingBottomSheet()"
+  >
+    <mat-icon data-status="unliked">add</mat-icon>
+    <span>Zeiterfassung hinzufügen</span>
+  </mat-list-item>
+  <mat-list-item
+    class="timeTrackItem"
+    *ngFor="let timeTracking of getRelatedTimeTrackings()"
+  >
+    <div>
+      <p>Zeiterfassung</p>
+      <p mat-line>
+        <!-- {{ timeTracking.startDate.toLocaleDateString("de-DE") }} -
+        {{ timeTracking.endDate.toLocaleDateString("de-DE") }} -->
+      </p>
+    </div>
+    <span>2.25h</span>
+    <mat-icon class="delete-icon" (click)="deleteTimeTracking(timeTracking)"
+      >delete</mat-icon
+    >
+  </mat-list-item>
+</mat-list>
