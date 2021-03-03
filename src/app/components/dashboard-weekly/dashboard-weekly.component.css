@@ -3,11 +3,6 @@
   min-width: 80vw;
 }
 
-.header-image {
-  background-image: url("https://via.placeholder.com/150");
-  background-size: cover;
-}
-
 .card-content-container {
   padding-left: 1rem;
 }

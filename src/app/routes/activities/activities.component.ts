@@ -1,3 +1,4 @@
+import { TimeTracking } from './../../models/time-tracking';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -18,6 +19,28 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.fetchTasks();
+  }
+
+  getTrackedTimetrackings(id: string): string {
+    let hours: number = 0;
+    let minutes: number = 0;
+    this.getTimeTrackings(id).forEach((tracking: TimeTracking) => {
+      hours +=
+        tracking.duration.hours +
+        (tracking.duration.minutes - (tracking.duration.minutes % 60)) / 60;
+      minutes += tracking.duration.minutes;
+      if (minutes > 59) {
+        hours++;
+        minutes -= 60;
+      }
+    });
+    return hours + ':' + minutes;
+  }
+
+  public getTimeTrackings(id: string) {
+    return this.dataService.timeTrackings.filter(
+      (timeTracking: TimeTracking) => timeTracking.taskId === id
+    );
   }
 
   toggleLikeStatus(task: Task) {

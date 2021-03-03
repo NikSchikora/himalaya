@@ -8,7 +8,9 @@
         }}</mat-icon>
         <div (click)="dataService.openTaskBottomSheet(task)">
           <p mat-line class="title">{{ task.title }}</p>
-          <p mat-subheader class="subtitle">Bisher so viele Stunden erfasst</p>
+          <p mat-subheader class="subtitle">
+            Bisher {{ getTrackedTimetrackings(task.id) }} Stunden erfasst
+          </p>
         </div>
       </mat-list-item>
       <mat-divider></mat-divider>
